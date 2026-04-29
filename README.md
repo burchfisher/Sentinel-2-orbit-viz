@@ -1,6 +1,6 @@
 # Sentinel-2 Orbit Visualization
 
-An interactive HTML visualization of the tandem orbits of the **Sentinel-2** satellite constellation, showing their cumulative swath coverage over a full 8-day repeat cycle.
+An interactive HTML visualization of the tandem orbits of **Sentinel-2A** and **Sentinel-2B**, showing their cumulative swath coverage over a full 8-day repeat cycle.
 
 ## 🌍 Live Demo
 
@@ -8,7 +8,7 @@ An interactive HTML visualization of the tandem orbits of the **Sentinel-2** sat
 
 ## About
 
-The Sentinel-2 mission, operated by the European Space Agency (ESA) as part of the Copernicus program, consists of two identical satellites flying in the same sun-synchronous orbit at 786 km, positioned 180° apart. Together, they image the Earth's land surfaces, large islands, and coastal waters with a 290 km swath, achieving a global revisit time of 5 days at the equator (and more frequently at higher latitudes).
+The Sentinel-2 mission, operated by the European Space Agency (ESA) as part of the Copernicus program, consists of two identical satellites — Sentinel-2A and Sentinel-2B — flying in the same sun-synchronous orbit at 786 km, positioned 180° apart. Together, they image the Earth's land surfaces, large islands, and coastal waters with a 290 km swath, achieving a global revisit time of 5 days at the equator (and more frequently at higher latitudes).
 
 This visualization illustrates how the two satellites' orbital paths combine over 8 days to produce near-complete global coverage.
 
