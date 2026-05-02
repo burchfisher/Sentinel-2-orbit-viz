@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sentinel-2 Orbit Coverage</title>
+  <title>Sentinel-2 Coverage Simulator</title>
   <link rel="icon" href="data:,">
   <style>
     :root {
@@ -48,20 +48,21 @@
     .mission { top: 20px; left: 24px; }
     .mission-title {
       color: var(--cyan);
-      font-size: 15px;
+      font-size: 24px;
       font-weight: 700;
-      letter-spacing: 0.26em;
+      letter-spacing: 0.18em;
+      line-height: 1;
     }
     .mission-sub {
-      margin-top: 5px;
+      margin-top: 7px;
       color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.16em;
+      font-size: 15px;
+      letter-spacing: 0.14em;
     }
     .credit {
-      margin-top: 9px;
+      margin-top: 10px;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.04em;
       text-transform: none;
     }
@@ -162,22 +163,22 @@
     .note {
       position: fixed;
       z-index: 5;
-      width: 300px;
+      width: 330px;
       color: var(--muted);
       pointer-events: none;
-      font-size: 13px;
-      line-height: 1.55;
+      font-size: 14px;
+      line-height: 1.58;
       letter-spacing: 0.02em;
       text-shadow: 0 1px 14px rgba(0,0,0,0.75);
     }
-    .note-left { left: 24px; top: 92px; }
-    .note-right { right: 24px; top: 92px; text-align: right; }
+    .note-left { left: 24px; top: 132px; }
+    .note-right { right: 24px; top: 132px; text-align: right; }
     .note strong {
       display: block;
       margin-bottom: 5px;
       color: var(--ink);
       font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
@@ -302,6 +303,9 @@
     .status.ready { opacity: 0; transition: opacity 500ms ease 700ms; }
 
     @media (max-width: 760px) {
+      .mission-title { font-size: 19px; }
+      .mission-sub { font-size: 12px; }
+      .credit { max-width: 250px; font-size: 10px; line-height: 1.35; }
       .clock { top: 76px; left: 24px; right: auto; text-align: left; }
       .date { font-size: 18px; }
       .clock-meta { font-size: 9px; }
@@ -322,7 +326,7 @@
 
   <div class="hud mission mono">
     <div class="mission-title">SENTINEL-2</div>
-    <div class="mission-sub">ORBIT COVERAGE</div>
+    <div class="mission-sub">COVERAGE SIMULATOR</div>
     <div class="credit">Developed by Burch Fisher · github.com/burchfisher/Sentinel-2-orbit-viz</div>
   </div>
 
@@ -358,7 +362,7 @@
     <div class="metric-row"><span class="muted">Altitude</span><span>786 km</span></div>
     <div class="metric-row"><span class="muted">Swath Width</span><span>290 km</span></div>
     <div class="metric-row"><span class="muted">Orbit Period</span><span>100.7 min</span></div>
-    <div class="metric-row"><span class="muted">Grid</span><span id="gridMeta">0.5 deg</span></div>
+    <div class="metric-row"><span class="muted">Grid</span><span id="gridMeta">0.25 deg</span></div>
     <div class="metric-row"><span class="muted">Latitude</span><span>56S-83N</span></div>
   </div>
 
@@ -376,6 +380,7 @@
       <div class="thumb" id="thumb"></div>
     </div>
     <div class="timeline-unit">days</div>
+    <button class="btn" id="resetViewBtn">Reset View</button>
   </div>
 
   <div class="status mono" id="status">Loading map geometry...</div>
@@ -423,8 +428,8 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   const NODE_DRIFT_PER_DAY = (2 * Math.PI) / 365.25;
   const R_VIS = 1.0;
   const ORBIT_VIS = R_VIS * (R_ORB / R_EARTH);
-  const COVERAGE_W = 720;
-  const COVERAGE_H = 360;
+  const COVERAGE_W = 1440;
+  const COVERAGE_H = 720;
   const TEX_W = 4096;
   const TEX_H = 2048;
   const DEG_PER_CELL = 360 / COVERAGE_W;
@@ -1000,6 +1005,10 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
       playing = !playing;
       play.textContent = playing ? 'Pause' : 'Play';
     });
+    document.getElementById('resetViewBtn').addEventListener('click', () => {
+      userYaw = DEFAULT_YAW;
+      userPitch = DEFAULT_PITCH;
+    });
     const timeline = document.getElementById('timeline');
     let scrubbing = false;
     const scrub = e => {
@@ -1029,8 +1038,10 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     });
   }
 
-  let userYaw = 0.12;
-  let userPitch = -0.18;
+  const DEFAULT_YAW = Math.PI / 2 + 0.12;
+  const DEFAULT_PITCH = -0.18;
+  let userYaw = DEFAULT_YAW;
+  let userPitch = DEFAULT_PITCH;
   let dragging = false;
   let lastX = 0;
   let lastY = 0;
