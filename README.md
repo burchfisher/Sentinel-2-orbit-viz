@@ -2,7 +2,7 @@
 
 An interactive HTML visualization of the tandem orbits of **Sentinel-2A** and **Sentinel-2B**, showing their cumulative swath coverage over a 7-day repeat cycle.
 
-[![Sentinel-2 tandem orbit visualization](https://github.com/user-attachments/assets/8f8be46b-50e2-4db5-b64c-2c6b59ffde29)](https://burchfisher.github.io/Sentinel-2-orbit-viz/)
+[![Sentinel-2 tandem orbit visualization](https://github.com/user-attachments/assets/e6a93b7c-77d5-4a78-b3be-3095a702af97)](https://burchfisher.github.io/Sentinel-2-orbit-viz/)
 
 ## 🌍 Live Demo
 
