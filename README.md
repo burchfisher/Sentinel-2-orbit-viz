@@ -1,6 +1,6 @@
-# Sentinel-2 Orbit Visualization
+# Sentinel-2 Coverage Visualization
 
-An interactive HTML visualization of the tandem orbits of **Sentinel-2A** and **Sentinel-2B**, showing their cumulative swath coverage over a 7-day repeat cycle.
+An interactive HTML visualization of the tandem orbits of **Sentinel-2A** and **Sentinel-2B**, showing their cumulative swath coverage over a 7-day period.
 
 [![Sentinel-2 tandem orbit visualization](https://github.com/user-attachments/assets/e6a93b7c-77d5-4a78-b3be-3095a702af97)](https://burchfisher.github.io/Sentinel-2-orbit-viz/)
 
@@ -34,8 +34,9 @@ Because the 2C/2D pair occupies the same 786 km sun-synchronous orbit with the s
 - 7-day timeline with day tick labels
 - 5-day combined-constellation revisit note in telemetry
 - Coverage counter for land area covered within the normal systematic latitude band, shown as `56S-83N`
-- Orbit Cycles counter for elapsed shared-orbit periods
+- `Orbit Cycles` counter for elapsed shared-orbit periods
 - Cyan and magenta swaths for the two active satellite tracks
+- `Reset View` button to return to the default descending-side orientation
 
 ## Model Notes
 
@@ -45,8 +46,8 @@ The visualization uses:
 - 290 km swath width
 - 143-orbit / 10-day repeat cycle for each individual satellite
 - Two satellites phased 180 degrees apart, producing a combined 5-day revisit cycle
-- Orbit Cycles reports elapsed orbital periods of the shared orbit, not the sum of individual spacecraft orbits
-- Area-weighted 0.5 degree land coverage grid
+- `Orbit Cycles` reports elapsed orbital periods of the shared orbit, not the sum of individual spacecraft orbits
+- Area-weighted 0.25 degree land coverage grid
 - TopoJSON land geometry rasterized through D3
 - Explicit antimeridian handling for swath rendering and coverage accounting
 
